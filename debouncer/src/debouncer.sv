@@ -1,3 +1,4 @@
+`timescale 1ns/100ps
 /*
 * Debouncer logic circuit
 * The bounced input can be an button, switch or any signal that may oscillate during state change
@@ -6,7 +7,6 @@
 * Version | Date        | Modifications
 * 1.0     | 2022/01/19  | Initial 
 */
-`timescale 1ns/100ps
 
 module debouncer 
 (
