@@ -54,6 +54,7 @@ always_ff @(posedge clock or negedge resetn) begin : flip_flop_inputs
     end
 end
 
+// Registered output
 always_ff @(posedge clock or negedge resetn ) begin : debounced_output
     if (~resetn) begin
         debounced_o <= 1'b0;
