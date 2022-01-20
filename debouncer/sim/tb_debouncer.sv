@@ -17,7 +17,7 @@ module tb_debouncer();
 // Outputs
     logic db_button_o;
 
-// Intantiates de DUT
+// Instantiates de DUT
     debouncer DUT(
         .clock       (clock),
         .resetn      (resetn),
@@ -29,34 +29,41 @@ module tb_debouncer();
     always #10 clock = ~clock;
 
     initial begin
-        $display ("[$time] << Starting simulation >> ");
-        clk = 1'b0;
+      // Dump waves
+      $dumpfile("dump.vcd");
+      $dumpvars(1);
+      
+      $display ("[%t] << Starting simulation >> ", $time);
+        clock = 1'b0;
         #10;
         resetn = 1'b0;
-        $display ("[$time] << Applying reset >> ");
+      $display ("[%t] << Applying reset >> ", $time);
         #100;
         resetn = 1'b1;
         button_i = 1'b0;
     
     // Oscilates button_i without any period match
-        #100  button_i = 1'b1;
-        #200  button_i = 1'b0;
-        #1000 button_i = 1'b1;
-        #2000 button_i = 1'b0;
-        #3000 button_i = 1'b1;
-        #1500 button_i = 1'b0;
-        #1200 button_i = 1'b1;
-        #2100 button_i = 1'b0;
-        #3300 button_i = 1'b1;
-        #4500 button_i = 1'b0;
-        #2700 button_i = 1'b1;
-        #50   button_i = 1'b0;
-        #100  button_i = 1'b1;
-        #75   button_i = 1'b0;
-        #855  button_i = 1'b1;
-        #9000 button_i = 1'b0;
-        #1000 button_i = 1'b1;
-        #2000 button_i = 1'b0;
+        #100 button_i = 1'b1;
+        #200 button_i = 1'b0;
+        #100 button_i = 1'b1;
+        #200 button_i = 1'b0;
+        #300 button_i = 1'b1;
+        #150 button_i = 1'b0;
+        #120 button_i = 1'b1;
+        #210 button_i = 1'b0;
+        #330 button_i = 1'b1;
+        #450 button_i = 1'b0;
+        #270 button_i = 1'b1;
+        #50  button_i = 1'b0;
+        #100 button_i = 1'b1;
+        #75  button_i = 1'b0;
+        #855 button_i = 1'b1;
+        #900 button_i = 1'b0;
+        #100 button_i = 1'b1;
+        #200 button_i = 1'b0;
+        #1000
+      $display("[%t] << Terminates simulation >> ", $time);
+        $finish;
     end
 
 endmodule
