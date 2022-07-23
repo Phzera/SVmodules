@@ -1,4 +1,3 @@
-// Code your design here
 `timescale 1ns/100ps
 /*
 * Debouncer logic circuit
