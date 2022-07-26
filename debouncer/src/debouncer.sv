@@ -28,7 +28,7 @@ logic add_en_s;
 logic clear_s;
 
 // Continuous assignments
-  assign clear_s  = (dff_q1 ^ dff_q2); // XOR input FF to look for input state change to clear counter
+assign clear_s  = (dff_q1 ^ dff_q2); // XOR input FF to look for input state change to clear counter
 assign add_en_s = ~cnt_s[N-1];     // Add to counter only if cnt_s MSB is equal to 0
 
 // cnt_next_s manager
