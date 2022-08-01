@@ -28,7 +28,7 @@ module async_fifo #(
     logic [ADDR_WIDTH - 1:0] wr_addr, rd_addr, wr_addr_gray, rd_addr_gray;
     logic [ADDR_WIDTH - 1:0] b_wraddr_q1, b_wr_addr_q, a_wr_addr_q;
     logic [ADDR_WIDTH - 1:0] a_rd_addr_q1, a_rd_addr_q, b_rd_addr_q;
-    logic [FIFO_DEPTH - 1:0] wr_en, wren_qual, rd_en, rden_qual;
+    logic [FIFO_DEPTH - 1:0] wr_en, wr_en_qual, rd_en, rd_en_qual;
     logic fifo_full_s, fifo_empty_s;
 
     // Convert to Gray code
@@ -96,7 +96,39 @@ module async_fifo #(
             a_rd_addr_q1 <= a_rd_addr_q;
         end
     end
+    
+    // Data write and read qualifiers
+    assign wr_en_qual = (wr_en & !fifo_full) ? (1 << wr_addr) : FIFO_DEPTH'b0;
+    assign rd_en_qual = (rd_en & !fifo_empty) ? (1 << rd_addr) : FIFO_DEPTH'b0;
 
+    genvar i;
+
+    generate
+        for(i = 0; i < FIFO_DEPTH; i++) begin  
+            always_ff @(posedge a_clk_i or negedge aresetn_i) begin
+                if(wr_en_qual[i]) begin
+                    data_q[i]  <= wr_data_i;
+                end else begin
+                    data_q[i] <= data_q[i];
+                end
+            end
+        end
+    endgenerate
+
+    always_comb begin
+        for (int j = 0; j < FIFO_DEPTH; j++) begin
+            if (rd_en_qual[j]) begin
+                rd_data_o = data_q[j];
+            end else begin
+                rd_data_o = FIFO_DEPTH'b0;
+            end
+        end
+    end
+
+    // Generates Full and Empty flags
+    assign fifo_full_o = (wr_addr_gray[2:0] == a_rd_addr_q1[2:0]) && 
+                        (wr_addr_gray[3:3] != a_rd_addr_q1[3:3]);
+    assign fifo_empty_o = (b_wraddr_q1[3:0] == rd_addr_gray[3:0]);
 
 
 endmodule
