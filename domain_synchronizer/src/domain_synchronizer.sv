@@ -28,6 +28,6 @@ always_ff @( posedge clk or negedge resetn ) begin : TWO_STAGE_SYNC
     end    
 end
 
-assign rise_o = async_i & ~async_q;
+assign d_sync_o = sync_q2;
 
 endmodule
