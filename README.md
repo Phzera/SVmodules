@@ -18,7 +18,7 @@ _These modules are designed for HDL learning. Once you clone the project, run it
 ## Roadmap
 
 - [ ] Add ASync FIFO Testbench
-- [ ] Add MUX
+- [X] <s>Add MUX</s>
 - [ ] Add DEMUX
 - [ ] Add RAM
 - [ ] UART
