@@ -7,7 +7,7 @@
 * 1.0     | 2022/05/22  | Initial version
 */
 
-module transD_ff (
+module transD(
     input  logic clk_i,
     input  logic d_i,
     output logic q_o;
