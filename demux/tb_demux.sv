@@ -1,14 +1,14 @@
 `timescale 1ns / 1ps
 /*
 * Demultiplexer Testbech
-* Mux 8 32b  channels into one 32b 
+* Demux 1 32b  channel into 8-32b channel according to Sel
 * Author: Pedro Oliveira
 * Version History
 * Version | Date        | Modifications
 * 1.0     | 2022/05/22  | Initial version
 */
 
-module tb_mux();
+module tb_demux();
         
     parameter DATA_WIDTH = 32;
     logic        tb_arstn;
@@ -22,33 +22,34 @@ module tb_mux();
     logic [DATA_WIDTH-1:0] tb_ch_f;
     logic [DATA_WIDTH-1:0] tb_ch_g;
     logic [DATA_WIDTH-1:0] tb_ch_h;
-    logic [DATA_WIDTH-1:0] tb_ch_in_i;  // Declare wire signal to collect DUT output
+    logic [DATA_WIDTH-1:0] tb_ch_in_i;
     integer i;
 
-    mux dut(
+    demux dut(
         .arstn_i(tb_arstn),
         .clk_i(tb_clk),
         .selector_i(tb_sel),
         .channel_in_i(tb_ch_in_i),
-        .channel_a_i(tb_ch_a),
-        .channel_b_i(tb_ch_b),
-        .channel_c_i(tb_ch_c),
-        .channel_d_i(tb_ch_d),
-        .channel_e_i(tb_ch_e),
-        .channel_f_i(tb_ch_f),
-        .channel_g_i(tb_ch_g),
-        .channel_h_i(tb_ch_h)
+        .channel_a_o(tb_ch_a),
+        .channel_b_o(tb_ch_b),
+        .channel_c_o(tb_ch_c),
+        .channel_d_o(tb_ch_d),
+        .channel_e_o(tb_ch_e),
+        .channel_f_o(tb_ch_f),
+        .channel_g_o(tb_ch_g),
+        .channel_h_o(tb_ch_h)
     );
 
     // Create clock
     always #10 tb_clk = ~tb_clk;
-
+    always #10 tb_ch_in_i <= $random;
     initial begin
          // Dump waves
-        $dumpfile("dump_tb_mux.vcd");
+        $dumpfile("dump_tb_demux.vcd");
         $dumpvars(1);
         tb_clk = 1'b0;
         tb_arstn = 1'b1;
+        tb_ch_in_i = 1'b0;
         #10;
         tb_arstn = 1'b0;
         #10;
@@ -58,9 +59,9 @@ module tb_mux();
         $monitor("[%0t] CH_E=0x%0h CH_F=0x%0h CH_G=0x%0h CH_H=0x%0h", $time, tb_ch_e, tb_ch_f, tb_ch_g, tb_ch_h);
 
         // 1. At time 0,random values to a/b/c/d/ and keep sel = 0
-        tb_sel  <= 3'b0;
-        tb_ch_in_i <= $random;
-
+        tb_sel<= 3'b0;
+         
+        
         // 2. Change the value of sel every 15 ns
         for (i = 1; i < 8; i = i + 1) begin
             #15 tb_sel <= i; 
