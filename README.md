@@ -19,7 +19,7 @@ _These modules are designed for HDL learning. Once you clone the project, run it
 
 - [ ] Add ASync FIFO Testbench
 - [X] <s>Add MUX</s>
-- [ ] Add DEMUX
+- [X] <s>Add DEMUX</s>
 - [ ] Add RAM
 - [ ] UART
     - [ ] TX
