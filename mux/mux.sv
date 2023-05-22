@@ -5,7 +5,7 @@
 * Author: Pedro Oliveira
 * Version History
 * Version | Date        | Modifications
-* 1.0     | 2022/02/06  | Initial 
+* 1.0     | 2022/05/22  | Initial version
 */
 
 module mux #(
