@@ -10,12 +10,12 @@
 module transD(
     input  logic clk_i,
     input  logic d_i,
-    output logic q_o;
+    output logic q_o
 );
 
     logic q_ff;
 
-    always @(d, clk_i, q_ff) begin
+    always @(d_i, clk_i, q_ff) begin
         if (!clk_i) begin
             q_ff <= q_ff;
             q_o <= !q_ff;

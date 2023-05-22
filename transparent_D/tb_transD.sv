@@ -26,19 +26,19 @@ module tb_transD();
         $dumpvars(1);
         tb_data = 1'b0;
         #10
-        tb_data = 1'b0
+        tb_data = 1'b0;
         #5
-        tb_data = 1'b1
+        tb_data = 1'b1;
         #5
-        tb_data = 1'b0
+        tb_data = 1'b0;
         #5
-        tb_data = 1'b1
+        tb_data = 1'b1;
         #5
-        tb_data = 1'b0
+        tb_data = 1'b0;
         #5
-        tb_data = 1'b1
+        tb_data = 1'b1;
         #5
-        tb_data = 1'b0
+        tb_data = 1'b0;
         #50;
     end
 endmodule
