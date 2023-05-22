@@ -26,38 +26,33 @@ module mux #(
     output logic [DATA_WIDTH-1:0] channel_out_o
     );
 
-    logic [2:0]  sel_q1, sel_q2;
+    logic [2:0]  sel_q;
     logic [DATA_WIDTH-1:0] channel_out_q1;
 
+    assign channel_out_o = channel_out_q1;
 
     // Sync selector input
     always_ff @(posedge clk_i or negedge arstn_i) begin : muxSelector
         if (~arstn_i) begin
-            sel_q1 <= 3'b0;
-            sel_q2 <= 3'b0;
+            sel_q <= 3'b0;
         end else begin
-            sel_q1 <= selector_i;
-            sel_q2 <= sel_q1;
+            sel_q <= selector_i;
         end
     end
 
     // Output channel multiplexer
-    always_ff @(posedge clk_i or negedge arstn_i or sel_q2) begin : blockName
-        if (arstn_i) begin
-            channel_out_q1 <= 32'b0;
-        end else begin
-            case (sel_q2)
-                3'b000  : channel_out_q1 <= channel_a_i;
-                3'b001  : channel_out_q1 <= channel_b_i;
-                3'b010  : channel_out_q1 <= channel_c_i;
-                3'b011  : channel_out_q1 <= channel_d_i;
-                3'b100  : channel_out_q1 <= channel_e_i;
-                3'b101  : channel_out_q1 <= channel_f_i;
-                3'b110  : channel_out_q1 <= channel_g_i;
-                3'b111  : channel_out_q1 <= channel_h_i;
+    always @(posedge clk_i or negedge arstn_i or sel_q) begin : channelOut
+        case (sel_q)
+            3'b000  : channel_out_q1 <= channel_a_i;
+            3'b001  : channel_out_q1 <= channel_b_i;
+            3'b010  : channel_out_q1 <= channel_c_i;
+            3'b011  : channel_out_q1 <= channel_d_i;
+            3'b100  : channel_out_q1 <= channel_e_i;
+            3'b101  : channel_out_q1 <= channel_f_i;
+            3'b110  : channel_out_q1 <= channel_g_i;
+            3'b111  : channel_out_q1 <= channel_h_i;
             default : channel_out_q1 <= 32'b0;
-            endcase
-        end
+        endcase
     end
 
 endmodule

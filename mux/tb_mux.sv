@@ -9,6 +9,8 @@
 */
 
 module tb_mux();
+        
+    parameter DATA_WIDTH = 32;
     logic        tb_arstn;
     logic        tb_clk;
     logic [2:0]  tb_sel;
@@ -23,9 +25,7 @@ module tb_mux();
     logic [DATA_WIDTH-1:0] tb_ch_out_o;  // Declare wire signal to collect DUT output
     integer i;
 
-    mux #(
-        parameter DATA_WIDTH = 32
-    ) dut (
+    mux dut(
         .arstn_i(tb_arstn),
         .clk_i(tb_clk),
         .selector_i(tb_sel),
@@ -48,10 +48,14 @@ module tb_mux();
         $dumpfile("dump_tb_mux.vcd");
         $dumpvars(1);
         tb_clk = 1'b0;
+        tb_arstn = 1'b1;
+        #10;
+        tb_arstn = 1'b0;
+        #10;
+        tb_arstn = 1'b1;
         // Launch monitor in background to display values to log whenever changes
-        $monitor("[%0t] SEL=0x%0h CH_A=0x%0h CH_B=0x%0h CH_C=0x%0h CH_D=0x%0h CH_E=0x%0h CH_F=0x%0h
-                 CH_G=0x%0h CH_H=0x%0h", $time, tb_sel, tb_ch_a, tb_ch_b, tb_ch_c, tb_ch_d,
-                 tb_ch_e, tb_ch_f, tb_ch_g, tb_ch_h);
+        $monitor("[%0t] SEL=0x%0h CH_A=0x%0h CH_B=0x%0h CH_C=0x%0h CH_D=0x%0h", $time, tb_sel, tb_ch_a, tb_ch_b, tb_ch_c, tb_ch_d);
+        $monitor("[%0t] CH_E=0x%0h CH_F=0x%0h CH_G=0x%0h CH_H=0x%0h", $time, tb_ch_e, tb_ch_f, tb_ch_g, tb_ch_h);
 
         // 1. At time 0,random values to a/b/c/d/ and keep sel = 0
         tb_sel  <= 3'b0;
