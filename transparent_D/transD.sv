@@ -21,7 +21,7 @@ module transD(
             q_o <= !q_ff;
         end else begin
             q_ff <= d_i;
-            q_o  <= !d_i;
+            q_o  <= q_ff;
         end
     end
 

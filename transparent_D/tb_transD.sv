@@ -10,11 +10,13 @@
 module tb_transD();
 
     logic tb_clk;
-    logic tb_data;
+    logic tb_data_in;
+    logic tb_data_out;
 
     transD dut (
         .clk_i(tb_clk),
-        .d_i(tb_data)
+        .d_i(tb_data_in),
+        .q_o(tb_data_out)
     );
 
     // Create clock
@@ -24,21 +26,24 @@ module tb_transD();
         // Dump waves
         $dumpfile("dump_tb_transD.vcd");
         $dumpvars(1);
-        tb_data = 1'b0;
+        tb_clk = 1'b0;
+        tb_data_in = 1'b0;
         #10
-        tb_data = 1'b0;
+        tb_data_in = 1'b1;
         #5
-        tb_data = 1'b1;
+        tb_data_in = 1'b0;
         #5
-        tb_data = 1'b0;
+        tb_data_in = 1'b1;
         #5
-        tb_data = 1'b1;
+        tb_data_in = 1'b0;
         #5
-        tb_data = 1'b0;
+        tb_data_in = 1'b1;
         #5
-        tb_data = 1'b1;
+        tb_data_in = 1'b0;
         #5
-        tb_data = 1'b0;
+        tb_data_in = 1'b1;
+        #5
+        tb_data_in = 1'b0;
         #50;
     end
 endmodule
