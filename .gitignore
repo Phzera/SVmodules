@@ -40,7 +40,7 @@ usage_statistics_webtalk.*
 !*.v
 !*.xdc
 !*.tcl
-!*.wcfg
+*.wcfg
 !*.ld
 !*.xml
 
@@ -79,7 +79,6 @@ usage_statistics_webtalk.*
 
 # We want MIG project file
 # I know this is ugly, but couldn't come up with better one
-*/*.wcfg/*
 */*.sim/*
 !**/block_designs/*/ip
 **/block_designs/*/ip/**/*.*
