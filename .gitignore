@@ -1,0 +1,89 @@
+#------------------------------------------------------------------------------
+# .gitignore for FPGA Design repo
+# published as part of https://github.com/Phzera/SVModules
+# Pedro Oliveira <ph.telecom@outlook.com>
+#------------------------------------------------------------------------------
+
+*.cache
+*.hw
+*.gen
+*.ip_user_files
+*.runs
+*.sim
+.Xil
+
+*.srcs/sources*/bd/**
+!*.srcs/sources*/bd/**/*.xci
+*.srcs/sources*/ip/**
+!*.srcs/sources*/ip/**/*.xci
+
+.ioplanning
+*.jou
+*.log
+*.str
+*.tmp
+usage_statistics_webtalk.*
+
+*.xsa
+##	This is an example .gitignore file for Vivado, please treat it as an example as
+##	it might not be complete. In addition, XAPP 1165 should be followed.
+
+# Exclude all
+*
+
+# Keep root folder files
+!*/
+!.gitignore
+!*.md
+
+# HDL / HVL / XDC / TCL
+!*.v
+!*.xdc
+!*.tcl
+!*.wcfg
+!*.ld
+!*.xml
+
+# Vivado Project
+**/vivado/*
+!*.tcl
+!*.mmi
+!*.xsa
+!*.bit
+
+# IPs
+**/xilinx_ips/*/*
+!*.xci
+!*.xcix
+
+# Vitis Project
+**/vitis/*
+!*.tcl
+
+# Firmware and Software
+!*.c
+!*.cpp
+!*.h
+!*.hpp
+!*.py
+
+# Helpers
+!*.bat
+!*.sh
+
+# Block Designs
+**/block_designs/*/*
+!**/block_designs/*/hdl
+!**/block_designs/*/*.bd
+!**/block_designs/*/*.bxml
+
+# We want MIG project file
+# I know this is ugly, but couldn't come up with better one
+*/*.wcfg/*
+*/*.sim/*
+!**/block_designs/*/ip
+**/block_designs/*/ip/**/*.*
+!**/block_designs/*/ip/**/mig_*.prj
+!**/block_designs/*/ip/*mig*/*.xci
+!**/block_designs/*/ip/*mig*/*.xml
+**/block_designs/*/ip/*rst*/
