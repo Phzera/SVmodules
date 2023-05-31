@@ -22,6 +22,7 @@ module clock_divider #(
             clk_out_o <= 'b0;
         end else if (enable_i) begin
             clk_out_o <= clk_out_o + 1'b1;
+        end
     end
 
 endmodule
