@@ -8,7 +8,7 @@
 */
 
 module tb_shiftreg;
-   parameter MSB;
+   localparam MSB = 8;
    logic           tb_clk;
    logic           tb_rstn;
    logic           tb_en;    // shift-register on/off
@@ -19,7 +19,8 @@ module tb_shiftreg;
     // Instatiate design
    shift_register #(
        .MSB(MSB)
-   ) shift_reg_u (
+       )
+   shift_reg_u (
        .clk_i  (tb_clk),
        .rstn_i (tb_rstn),
        .en_i   (tb_en),  
