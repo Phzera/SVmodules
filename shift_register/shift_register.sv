@@ -5,7 +5,7 @@
 * Author: Pedro Oliveira
 * Version History
 * Version | Date        | Modifications
-* 1.0     | 2022/05/22  | Initial version
+* 1.0     | 2022/05/31  | Initial version
 *   Key features:
 *   Can be enabled or disabled by driving en_i
 *   Shift to left or right with dir_i
@@ -23,7 +23,7 @@ module shift_register #(
     output logic [MSB-1:0] data_o   // Output read currennt value of all flops
 );
 
-    always_ff @( posedge ) begin : blockName
+    always_ff @(posedge clk_i or negedge rstn_i) begin : SHIFTREG
         if(!rstn_i) begin
             data_o <= 'b0;
         end else begin

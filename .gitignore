@@ -17,28 +17,17 @@
 *.srcs/sources*/ip/**
 !*.srcs/sources*/ip/**/*.xci
 
-.ioplanning
+*.ioplanning
 *.jou
 *.log
 *.str
 *.tmp
 usage_statistics_webtalk.*
 
-*.xsa
-##	This is an example .gitignore file for Vivado, please treat it as an example as
-##	it might not be complete. In addition, XAPP 1165 should be followed.
-
-# Exclude all
-*
-
 # Keep root folder files
-!*/
 !.gitignore
-!*.md
 
 # HDL / HVL / XDC / TCL
-!*.v
-!*.xdc
 !*.tcl
 *.wcfg
 !*.ld
@@ -50,6 +39,7 @@ usage_statistics_webtalk.*
 !*.mmi
 !*.xsa
 !*.bit
+*.xpr
 
 # IPs
 **/xilinx_ips/*/*
