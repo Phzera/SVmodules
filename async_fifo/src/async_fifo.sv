@@ -32,9 +32,16 @@ module async_fifo #(
     logic fifo_full_s, fifo_empty_s;
 
     // Convert to Gray code
-    assign wr_addr_gray = (wr_addr >> 1) ^ wr_addr;
-    assign rd_addr_gray = (rd_addr >> 1) ^ rd_addr;
-
+    //assign wr_addr_gray = (wr_addr >> 1) ^ wr_addr;
+    //assign rd_addr_gray = (rd_addr >> 1) ^ rd_addr;
+    bin2gray wr_bin2gray_u(
+        .bin_i(wr_addr),
+        .gray_o(wr_addr_gray)
+    );
+    bin2gray rd_bin2gray_u(
+        .bin_i(rd_addr),
+        .gray_o(rd_addr_gray)
+    );
 
     always_comb begin : GEN_WRITE_ADDRESS
         if (!fifo_full_s & wr_en_i) begin

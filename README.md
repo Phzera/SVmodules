@@ -20,10 +20,14 @@ _These modules are designed for HDL learning. Once you clone the project, run it
 - [ ] Add ASync FIFO Testbench
 - [X] <s>Add MUX</s>
 - [X] <s>Add DEMUX</s>
-- [ ] Add RAM
+- [ ] FSM
+  - [ ] Mealy
+  - [ ] Moore
+  - [ ] ...
 - [ ] UART
     - [ ] TX
     - [ ] RX
+- [ ] Add RAM 
 - [ ] TBD...
 
 -> Continuos improvement with no deadlines...

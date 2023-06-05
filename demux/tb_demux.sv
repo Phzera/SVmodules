@@ -43,6 +43,7 @@ module tb_demux();
     // Create clock
     always #10 tb_clk = ~tb_clk;
     always #10 tb_ch_in_i <= $random;
+    
     initial begin
          // Dump waves
         $dumpfile("dump_tb_demux.vcd");
